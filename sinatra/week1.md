@@ -7,8 +7,9 @@ Week 1, Day 1
 - added the db to gitignore
 
 ## Source Code
-/hello - hello world
-/crud - simple crud rest backend using data mapper
+
+    /hello - hello world
+    /crud - simple crud rest backend using data mapper
 
 ## Links
 * W3C http method definitions http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html
@@ -22,6 +23,7 @@ Week 1, Day 1
 ### Do:
 * test was already there!
 * added creation_date to Bookmark
+* handler for bookmarks sorted by creation_date
 
 ## Urls to open
 http://localhost:4567/bookmarks/1

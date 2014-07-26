@@ -47,6 +47,11 @@ get "/bookmarks" do
   content_type :json
   get_all_bookmarks.to_json
 end
+get "/bookmarks_sorted" do
+  content_type :json
+  bookmarks = Bookmark.all(:order => [:creation_date.desc])
+  bookmarks.to_json
+end
 
 post "/bookmarks" do
   input = params.slice *bookmark_whitelist
