@@ -20,9 +20,9 @@ describe "Bookmarking App" do
 
   it "returns a list of bookmarks" do
     get "/bookmarks"
-    last_response.should be_ok
+    expect(last_response).to be_ok
     bookmarks = JSON.parse(last_response.body)
-    bookmarks.should be_instance_of(Array)
+    expect(bookmarks).to be_instance_of(Array)
   end
 
   it "creates a new bookmark" do
@@ -33,8 +33,8 @@ describe "Bookmarking App" do
     post "/bookmarks",
       {:url => "http://www.test.com", :title => "Test"}
 	  
-    last_response.status.should == 201
-    last_response.body.should match(/\/bookmarks\/\d+/) # (2)
+    expect(last_response.status).to eq(201)
+    expect(last_response.body).to match(/\/bookmarks\/\d+/) # (2)
 
     get "/bookmarks"
     bookmarks = JSON.parse(last_response.body)
@@ -49,7 +49,7 @@ describe "Bookmarking App" do
     id = bookmark_uri.split("/").last # (4)
     
     put "/bookmarks/#{id}", {:title => "Success"} # (5)
-    last_response.status.should == 204
+    expect(last_response.status).to eq(204)
 
     get "/bookmarks/#{id}"
     retrieved_bookmark = JSON.parse(last_response.body)
@@ -64,7 +64,7 @@ describe "Bookmarking App" do
     last_size = bookmarks.size
     
     delete "/bookmarks/#{bookmarks.last['id']}"
-    last_response.status.should == 200
+    expect(last_response.status).to eq(200)
 
     get "/bookmarks"
     bookmarks = JSON.parse(last_response.body)

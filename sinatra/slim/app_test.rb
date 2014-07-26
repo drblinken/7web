@@ -28,20 +28,20 @@ describe "Bookmarking App" do
 
   it "returns a list of JSON bookmarks" do
     get_json_bookmarks
-    last_response.should be_ok
+    expect(last_response).to be_ok
     bookmarks = JSON.parse(last_response.body)
-    bookmarks.should be_instance_of(Array)
+    expect(bookmarks).to be_instance_of(Array)
     bookmarks.each do |bookmark|
-      bookmark["id"].should_not be_zero
-      bookmark["url"].length.should_not be_zero
-      bookmark["title"].length.should_not be_zero
+      expect(bookmark["id"]).not_to be_zero
+      expect(bookmark["url"].length).not_to be_zero
+      expect(bookmark["title"].length).not_to be_zero
     end
   end
 
   it "returns a list of HTML bookmarks" do
     get_html_bookmarks
-    last_response.should be_ok
-    expect(last_response.body.include?("List of Bookmarks")).to be_true
+    expect(last_response).to be_ok
+    expect(last_response.body.include?("List of Bookmarks")).to be_truthy
   end
 
   it "creates a new bookmark" do
@@ -52,8 +52,8 @@ describe "Bookmarking App" do
     post "/bookmarks",
       {:url => "http://www.test.com", :title => "Test"},
       {"HTTP_ACCEPT" => "application/json"}
-    last_response.status.should == 201
-    last_response.body.should match(/\/bookmarks\/\d+/)
+    expect(last_response.status).to eq(201)
+    expect(last_response.body).to match(/\/bookmarks\/\d+/)
 
     get_json_bookmarks
     bookmarks = JSON.parse(last_response.body)
@@ -70,7 +70,7 @@ describe "Bookmarking App" do
     
     put "/bookmarks/#{id}", {:url => url, :title => "Success"},
       {"HTTP_ACCEPT" => "text/html"}
-    last_response.status.should == 302
+    expect(last_response.status).to eq(302)
 
     get "/bookmarks/#{id}", {}, {"HTTP_ACCEPT" => "application/json"}
     retrieved_bookmark = JSON.parse(last_response.body)
@@ -85,7 +85,7 @@ describe "Bookmarking App" do
     last_size = bookmarks.size
     
     delete "/bookmarks/#{bookmarks.last['id']}"
-    last_response.status.should == 302
+    expect(last_response.status).to eq(302)
 
     get_json_bookmarks
     bookmarks = JSON.parse(last_response.body)

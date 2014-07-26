@@ -20,9 +20,9 @@ describe "Bookmarking App" do
 
   it "returns a list of bookmarks" do
     get "/bookmarks"
-    last_response.should be_ok
+    expect(last_response).to be_ok
     bookmarks = JSON.parse(last_response.body)
-    bookmarks.should be_instance_of(Array)
+    expect(bookmarks).to be_instance_of(Array)
   end
 
   it "creates a new bookmark" do
@@ -32,8 +32,8 @@ describe "Bookmarking App" do
 
     post "/bookmarks",
       {:url => "http://www.test.com", :title => "Test"}
-    last_response.status.should == 201
-    last_response.body.should match(/\/bookmarks\/\d+/)
+    expect(last_response.status).to eq(201)
+    expect(last_response.body).to match(/\/bookmarks\/\d+/)
 
     get "/bookmarks"
     bookmarks = JSON.parse(last_response.body)
@@ -47,7 +47,7 @@ describe "Bookmarking App" do
     id = bookmark_uri.split("/").last
     
     put "/bookmarks/#{id}", {:url => url, :title => "Success"}
-    last_response.status.should == 204
+    expect(last_response.status).to eq(204)
 
     get "/bookmarks/#{id}"
     retrieved_bookmark = JSON.parse(last_response.body)
@@ -62,7 +62,7 @@ describe "Bookmarking App" do
     last_size = bookmarks.size
     
     delete "/bookmarks/#{bookmarks.last['id']}"
-    last_response.status.should == 200
+    expect(last_response.status).to eq(200)
 
     get "/bookmarks"
     bookmarks = JSON.parse(last_response.body)
@@ -71,22 +71,22 @@ describe "Bookmarking App" do
 
   it "sends an error code for an invalid get request" do
     get "/bookmarks/0"
-    last_response.status.should == 404
+    expect(last_response.status).to eq(404)
   end
 
   it "sends an error code for an invalid put request" do
     put "/bookmarks/0", {:title => "Success"}
-    last_response.status.should == 404
+    expect(last_response.status).to eq(404)
   end
 
   it "sends an error code for an invalid delete request" do
     delete "/bookmarks/0"
-    last_response.status.should == 404
+    expect(last_response.status).to eq(404)
   end
 
   it "sends an error code for an invalid create request" do
     post "/bookmarks", {:url => "test", :title => "Test"}
-    last_response.status.should == 400
+    expect(last_response.status).to eq(400)
   end
 
   it "sends an error code for an invalid update request" do
@@ -95,16 +95,16 @@ describe "Bookmarking App" do
     id = bookmarks.first['id']
 
     put "/bookmarks/#{id}", {:url => "Invalid"}
-    last_response.status.should == 400
+    expect(last_response.status).to eq(400)
   end
 
   it "creates and updates a bookmark with tags" do
     post "/bookmarks",
       {:url => "http://www.test.com", :title => "Test",
        :tagsAsString => "One, Two"}
-    last_response.status.should == 201
+    expect(last_response.status).to eq(201)
     link = last_response.body
-    link.should match(/\/bookmarks\/\d+/)
+    expect(link).to match(/\/bookmarks\/\d+/)
 
     get link
     bookmark = JSON.parse(last_response.body)
@@ -114,7 +114,7 @@ describe "Bookmarking App" do
 
     put "/bookmarks/#{bookmark["id"]}", {:url => bookmark["url"],
       :title => bookmark["title"], :tagsAsString => " Four ,  Two "}
-    last_response.status.should == 204
+    expect(last_response.status).to eq(204)
 
     get link
     bookmark = JSON.parse(last_response.body)
@@ -134,16 +134,16 @@ describe "Bookmarking App" do
 
     get "/bookmarks/Tag1/Tag4"
     bookmarks = JSON.parse(last_response.body)
-    bookmarks.size.should eq(1)
-    bookmarks[0]["title"].should eq("Test4")
+    expect(bookmarks.size).to eq(1)
+    expect(bookmarks[0]["title"]).to eq("Test4")
 
     get "/bookmarks/Tag1"
     bookmarks = JSON.parse(last_response.body)
-    bookmarks.size.should eq(2)
+    expect(bookmarks.size).to eq(2)
 
     bookmarks.each do |bookmark|
       delete "/bookmarks/#{bookmark['id']}"
-      last_response.status.should == 200
+      expect(last_response.status).to eq(200)
     end
   end
 end
