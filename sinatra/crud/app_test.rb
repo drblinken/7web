@@ -54,6 +54,8 @@ describe "Bookmarking App" do
     get "/bookmarks/#{id}"
     retrieved_bookmark = JSON.parse(last_response.body)
     expect(retrieved_bookmark["title"]).to eq("Success") # (6)
+    # also, the url should not be touched!
+    expect(retrieved_bookmark["url"]).to eq("http://www.test.com") # errata-page-8
   end
 
   it "deletes a bookmark" do

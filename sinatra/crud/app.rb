@@ -58,6 +58,6 @@ end
 
 class Hash
   def slice(*whitelist)
-    whitelist.inject({}) {|result, key| result.merge(key => self[key])}
+    select{ |k,v| whitelist.include?(k) && !v.nil?}
   end
 end
