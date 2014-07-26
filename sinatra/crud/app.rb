@@ -26,7 +26,7 @@ end
 put "/bookmarks/:id" do
   id = params[:id]
   bookmark = Bookmark.get(id)
-  input = params.slice "url", "title"
+  input = params.slice *bookmark_whitelist
   bookmark.update input
   204 # No Content
 end
@@ -40,13 +40,17 @@ end
 def get_all_bookmarks
   Bookmark.all(:order => :title)
 end
+def bookmark_whitelist
+  ["url", "title", "creation_date"]
+end
 get "/bookmarks" do
   content_type :json
   get_all_bookmarks.to_json
 end
 
 post "/bookmarks" do
-  input = params.slice "url", "title"
+  input = params.slice *bookmark_whitelist
+  input["creation_date"] ||= Date.today
   bookmark = Bookmark.create input
   # Created
   [201, "/bookmarks/#{bookmark['id']}"]

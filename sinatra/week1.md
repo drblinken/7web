@@ -20,6 +20,8 @@ Week 1, Day 1
 * DataMapper: http://datamapper.org
 
 ### Do:
+* test was already there!
+* added creation_date to Bookmark
 
 ## Urls to open
 http://localhost:4567/bookmarks/1
