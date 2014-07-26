@@ -7,6 +7,9 @@ where it can be found [here](http://pragprog.com/titles/7web/source_code).
 
 * Week 1: [Sinatra](/sinatra)
 
+Found an [erratum#77057](http://pragprog.com/titles/7web/errata):
 
+Here's the link to the commit that fixes it:
 
-open http://localhost:4567
+    https://github.com/drblinken/7web/commit/581413b364242fc052a83ad0e8b5382b9f9af634
+
