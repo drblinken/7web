@@ -1,5 +1,5 @@
 source "https://rubygems.org"
-
+# day 1
 gem 'sinatra'
 
 # page 3
@@ -11,3 +11,12 @@ gem 'sqlite3'
 gem 'data_mapper'
 gem 'dm-sqlite-adapter'
 
+# day 2 - views
+# page 13 - handling json and html requests
+gem 'sinatra-contrib'
+
+# page 18
+gem 'slim'
+
+gem 'mustache'
+gem 'sinatra-mustache'
