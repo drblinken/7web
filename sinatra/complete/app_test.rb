@@ -1,9 +1,9 @@
 #---
 # Excerpted from "Seven Web Frameworks in Seven Weeks",
 # published by The Pragmatic Bookshelf.
-# Copyrights apply to this code. It may not be used to create training material, 
+# Copyrights apply to this code. It may not be used to create training material,
 # courses, books, articles, and the like. Contact us if you are in doubt.
-# We make no guarantees that this code is fit for any purpose. 
+# We make no guarantees that this code is fit for any purpose.
 # Visit http://www.pragmaticprogrammer.com/titles/7web for more book information.
 #---
 require_relative "app"
@@ -37,7 +37,6 @@ describe "Bookmarking App" do
       expect(bookmark["title"].length).not_to be_zero
     end
   end
-
   it "returns a list of HTML bookmarks" do
     get_html_bookmarks
     expect(last_response).to be_ok
@@ -60,6 +59,14 @@ describe "Bookmarking App" do
     expect(bookmarks.size).to eq(last_size + 1)
   end
 
+  it "gets a single bookmark in JSON" do
+    bookmark = Bookmark.create(title: "Created by Test", url: "http://drblinken.github.io")
+    id = bookmark.id
+    get "/bookmarks/#{id}", {}, {"HTTP_ACCEPT" => "application/json"}
+    retrieved_bookmark = JSON.parse(last_response.body)
+    expect(retrieved_bookmark["title"]).to eq("Created by Test")
+  end
+
   it "updates a bookmark" do
     url = "http://www.test.com"
     post "/bookmarks",
@@ -67,7 +74,7 @@ describe "Bookmarking App" do
       {"HTTP_ACCEPT" => "application/json"}
     bookmark_uri = last_response.body
     id = bookmark_uri.split("/").last
-    
+
     put "/bookmarks/#{id}", {:url => url, :title => "Success"},
       {"HTTP_ACCEPT" => "text/html"}
     expect(last_response.status).to eq(302)
@@ -83,12 +90,45 @@ describe "Bookmarking App" do
     get_json_bookmarks
     bookmarks = JSON.parse(last_response.body)
     last_size = bookmarks.size
-    
+
     delete "/bookmarks/#{bookmarks.last['id']}"
     expect(last_response.status).to eq(302)
 
     get_json_bookmarks
     bookmarks = JSON.parse(last_response.body)
     expect(bookmarks.size).to eq(last_size - 1)
+  end
+
+  describe "Validation" do
+
+    it "sends an error code for an invalid get request" do
+      get "/bookmarks/0"
+      expect(last_response.status).to eq(404)
+    end
+
+    it "sends an error code for an invalid put request" do
+      put "/bookmarks/0", {:title => "Success"}
+      expect(last_response.status).to eq(404)
+    end
+
+    it "sends an error code for an invalid delete request" do
+      delete "/bookmarks/0"
+      expect(last_response.status).to eq(404)
+    end
+
+    it "sends an error code for an invalid create request" do
+      post "/bookmarks", {:url => "test", :title => "Test"}
+      expect(last_response.status).to eq(400)
+    end
+
+    it "sends an error code for an invalid update request" do
+      get_json_bookmarks
+      bookmarks = JSON.parse(last_response.body)
+      id = bookmarks.first['id']
+
+      put "/bookmarks/#{id}", {:url => "Invalid"}
+      expect(last_response.status).to eq(400)
+    end
+
   end
 end
