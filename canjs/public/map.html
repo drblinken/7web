@@ -1,6 +1,11 @@
 <!--
-sliders:
+dragging:
 http://jsfiddle.net/KQpe9/
+http://www.html5rocks.com/de/tutorials/dnd/basics/
+
+editing:
+www.developerdrive.com/2012/06/allowing-users-to-edit-text-content-with-html5/
+
 -->
 <!doctype html>
 <html lang="en">
@@ -14,6 +19,12 @@ http://jsfiddle.net/KQpe9/
     background-color: #FFAAAA;
     padding: 0.5 em;
     position:absolute;}
+.green-box {
+    border: 1px solid green;
+    color: black;
+    background-color: #AAFFAA;
+    padding: 0.5 em;
+    position:absolute;}
 
     .container{
     position:relative;
@@ -25,10 +36,21 @@ http://jsfiddle.net/KQpe9/
 </style>
   </head>
   <body>
-    <div id = "container" class = "container">
-    <span draggable = "true" id="spanbox" class = "red-box">SPAN </span>
-    <div id="divbox" class = "red-box">DIV</div>
-</div>
+    <div id = "container" class = "container" >
+      <div id="divbox" class = "green-box">green box</div>
+      <span id="spanbox" class = "red-box" contenteditable = "true">SPAN </span>
+
+      <div id="divbox" class = "red-box">DIV</div>
+
+   </div>
+   <div id = "xy">XY</div>
+    <div id = "container2" class = "container" contenteditable = "true">
+      <div id="divbox" class = "green-box">green box</div>
+      <span id="spanbox" class = "red-box" contenteditable = "true">SPAN </span>
+
+      <div id="divbox" class = "red-box">DIV</div>
+
+   </div>
   </body>
   <script src="lib/jquery/jquery-1.10.2.js"></script>
   <script src="lib/canjs.com-1.1.8/can.jquery.js"></script>
