@@ -1,9 +1,9 @@
 #---
 # Excerpted from "Seven Web Frameworks in Seven Weeks",
 # published by The Pragmatic Bookshelf.
-# Copyrights apply to this code. It may not be used to create training material, 
+# Copyrights apply to this code. It may not be used to create training material,
 # courses, books, articles, and the like. Contact us if you are in doubt.
-# We make no guarantees that this code is fit for any purpose. 
+# We make no guarantees that this code is fit for any purpose.
 # Visit http://www.pragmaticprogrammer.com/titles/7web for more book information.
 #---
 require "sinatra"
@@ -16,7 +16,9 @@ require "dm-serializer"
 DataMapper::setup(:default, "sqlite3://#{Dir.pwd}/bookmarks.db")
 DataMapper.finalize.auto_migrate!
 
-before %r{/bookmarks/(\d+)} do |id|
+A_BOOKMARK = %r{/bookmarks/(\d+)}
+
+before A_BOOKMARK do |id|
   # ...
   @bookmark = Bookmark.get(id)
 
@@ -27,13 +29,13 @@ end
 
 with_tagList = {:methods => [:tagList]}
 
-get %r{/bookmarks/\d+} do
+get A_BOOKMARK do
   content_type :json
 
   @bookmark.to_json with_tagList
 end
 
-put %r{/bookmarks/\d+} do
+put A_BOOKMARK do
   # ...
   input = params.slice "url", "title"
   if @bookmark.update input
@@ -44,7 +46,7 @@ put %r{/bookmarks/\d+} do
   end
 end
 
-delete %r{/bookmarks/\d+} do
+delete A_BOOKMARK do
   # ...
   if @bookmark.destroy
     200 # OK
