@@ -37,6 +37,15 @@ describe "Bookmarking App" do
       expect(bookmark["title"].length).not_to be_zero
     end
   end
+  it "returns a list of JSON bookmarks including taglists" do
+    get_json_bookmarks
+    expect(last_response).to be_ok
+    bookmarks = JSON.parse(last_response.body)
+    expect(bookmarks).to be_instance_of(Array)
+    bookmarks.each do |bookmark|
+      expect(bookmark["tagList"]).not_to be_nil
+    end
+  end
   it "returns a list of HTML bookmarks" do
     get_html_bookmarks
     expect(last_response).to be_ok
@@ -130,5 +139,57 @@ describe "Bookmarking App" do
       expect(last_response.status).to eq(400)
     end
 
+  end
+
+  describe "Tagging" do
+
+    it "creates and updates a bookmark with tags" do
+      post "/bookmarks",
+        {:url => "http://www.test.com", :title => "Test",
+         :tagsAsString => "One, Two"}, {"HTTP_ACCEPT" => "application/json"}
+      expect(last_response.status).to eq(201)
+      link = last_response.body
+      expect(link).to match(/\/bookmarks\/\d+/)
+
+      get link, {}, {"HTTP_ACCEPT" => "application/json"}
+      bookmark = JSON.parse(last_response.body)
+      expect(bookmark["tagList"].size).to eq(2)
+      expect(bookmark["tagList"][0]).to eq("One")
+      expect(bookmark["tagList"][1]).to eq("Two")
+
+      put "/bookmarks/#{bookmark["id"]}", {:url => bookmark["url"],
+        :title => bookmark["title"], :tagsAsString => " Four ,  Two "}, {"HTTP_ACCEPT" => "application/json"}
+      expect(last_response.status).to eq(204)
+
+      get link, {}, {"HTTP_ACCEPT" => "application/json"}
+      bookmark = JSON.parse(last_response.body)
+      expect(bookmark["tagList"].size).to eq(2)
+      expect(bookmark["tagList"][0]).to eq("Four")
+      expect(bookmark["tagList"][1]).to eq("Two")
+    end
+
+    it "filters bookmarks by tags" do
+      post "/bookmarks",
+        {:url => "http://www.test2.com", :title => "Test2",
+         :tagsAsString => "Tag1,Tag2"}, {"HTTP_ACCEPT" => "application/json"}
+
+      post "/bookmarks",
+        {:url => "http://www.test4.com", :title => "Test4",
+         :tagsAsString => "Tag4,Tag1"}, {"HTTP_ACCEPT" => "application/json"}
+
+      get "/bookmarks/Tag1/Tag4", {}, {"HTTP_ACCEPT" => "application/json"}
+      bookmarks = JSON.parse(last_response.body)
+      expect(bookmarks.size).to eq(1)
+      expect(bookmarks[0]["title"]).to eq("Test4")
+
+      get "/bookmarks/Tag1", {}, {"HTTP_ACCEPT" => "application/json"}
+      bookmarks = JSON.parse(last_response.body)
+      expect(bookmarks.size).to eq(2)
+
+      bookmarks.each do |bookmark|
+        delete "/bookmarks/#{bookmark['id']}"
+        expect(last_response.status).to eq(302)
+      end
+    end
   end
 end

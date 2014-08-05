@@ -8,19 +8,9 @@
 #---
 require "data_mapper"
 
-class Bookmark
+class Tagging
   include DataMapper::Resource
 
-  property :id, Serial
-  property :url, String, :required => true, :format => :url
-  property :title, String, :required => true
-  # Add tag support
-  has n, :taggings, :constraint => :destroy
-  has n, :tags, :through => :taggings, :order => [:label.asc]
-  def tagList
-    tags.collect do |tag|
-      tag.label
-    end
-  end
-
+  belongs_to :tag, :key => true
+  belongs_to :bookmark, :key => true
 end
