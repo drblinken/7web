@@ -13,6 +13,9 @@ require "json"
 
 describe "Bookmarking App" do
   include Rack::Test::Methods
+  before (:each) do
+    DataMapper.finalize.auto_migrate!
+  end
 
   def app
     Sinatra::Application
@@ -131,6 +134,7 @@ describe "Bookmarking App" do
     end
 
     it "sends an error code for an invalid update request" do
+      Bookmark.create(:url => "http://www.test.com", :title => "Test")
       get_json_bookmarks
       bookmarks = JSON.parse(last_response.body)
       id = bookmarks.first['id']
@@ -191,5 +195,23 @@ describe "Bookmarking App" do
         expect(last_response.status).to eq(302)
       end
     end
+    describe "is editable via html" do
+      require 'capybara'
+      require 'capybara/dsl'
+      include Capybara::DSL
+      before (:each) do
+        Capybara.app = app
+      end
+      it "accepts tagLists from the form" do
+        visit "/bookmark/new"
+        fill_in 'URL', :with => 'http://drblinken.github.io'
+        fill_in 'Title', :with => 'drblinken'
+        fill_in 'Tags', :with => 'uno, dos, tres'
+        click_on 'Save'
+       # save_and_open_page
+        expect(page).to have_content("uno, dos, tres")
+      end
+    end
   end
+
 end

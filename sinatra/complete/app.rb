@@ -17,7 +17,6 @@ require "sinatra/respond_with"
 require "slim"
 
 DataMapper::setup(:default, "sqlite3://#{Dir.pwd}/bookmarks.db")
-#DataMapper.finalize.auto_migrate!
 DataMapper.finalize.auto_upgrade!
 
 A_BOOKMARK = %r{/bookmarks/(\d+)}

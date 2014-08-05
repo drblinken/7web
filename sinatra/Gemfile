@@ -20,3 +20,9 @@ gem 'slim'
 
 gem 'mustache'
 gem 'sinatra-mustache'
+
+
+
+# for complete -
+gem 'capybara'
+gem 'launchy'
