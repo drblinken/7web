@@ -1,0 +1,36 @@
+<!--
+sliders:
+http://jsfiddle.net/KQpe9/
+-->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Map</title>
+    <style>
+.red-box {
+    border: 1px solid red;
+    color: black;
+    background-color: #FFAAAA;
+    padding: 0.5 em;
+    position:absolute;}
+
+    .container{
+    position:relative;
+    border:1px solid red;
+    height:400px;
+}
+
+}
+</style>
+  </head>
+  <body>
+    <div id = "container" class = "container">
+    <span draggable = "true" id="spanbox" class = "red-box">SPAN </span>
+    <div id="divbox" class = "red-box">DIV</div>
+</div>
+  </body>
+  <script src="lib/jquery/jquery-1.10.2.js"></script>
+  <script src="lib/canjs.com-1.1.8/can.jquery.js"></script>
+  <script src="map.js"></script>
+</html>

@@ -1,29 +1,11 @@
 /***
- * Excerpted from "Seven Web Frameworks in Seven Weeks",
- * published by The Pragmatic Bookshelf.
- * Copyrights apply to this code. It may not be used to create training material,
- * courses, books, articles, and the like. Contact us if you are in doubt.
- * We make no guarantees that this code is fit for any purpose.
- * Visit http://www.pragmaticprogrammer.com/titles/7web for more book information.
-***/
+ * adapted from http://jsfiddle.net/KQpe9/
+ **/
 
-doit = function() {
-  // Use can for CanJS
-  var $result = $("#result");
-  can.each(["One", "Two", "Three"], function(it) {
-    $result.append(it).append(" - ");
-  });
-  $result.append("Go CanJS!");
-  // $ is shortcut for jQuery
-  var $more = jQuery("#more");
-  $more.append("me was here");
 
-  $old = $("#oldtext");
-  $old.text("jö der neue text");
-}
-
-$(document).ready(doit);
-
+$(function() {
+    $('.red-box').slider();
+});
 $.fn.slider = function() {
     return this.each(function() {
         var $el = $(this);
