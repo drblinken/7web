@@ -14,6 +14,7 @@ $.fn.slider = function() {
         var startY = 0;
         var startX = 0;
         var startT = 0;
+        var startL = 0;
         $el.mousedown(function(ev) {
             dragging = true;
             startY = ev.clientY;
@@ -23,7 +24,7 @@ $.fn.slider = function() {
             startL = parseInt(startL)
             if (isNaN(startL)){
               startL = 0
-            }
+           }
            //$('#xy').append(startL);
 
         });
