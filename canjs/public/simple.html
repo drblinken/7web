@@ -7,6 +7,24 @@
   <head>
     <meta charset="utf-8">
     <title>Dr. Blinken's Simple Page</title>
+    <style type = "text/css">
+    <!--
+    .header {
+    background: #E1E3E1;
+    padding: 10px 0;
+    border-bottom: 1px solid #B5B6B5;
+    margin-bottom: 15px;
+}
+h1 {
+    font-size: 24px;
+    font-weight: bold;
+}
+p {
+    margin: 10px 0;
+}
+
+-->
+</style>
   </head>
   <body>
     <div id="result">Result goes here: </div>
@@ -14,6 +32,24 @@
     <div id="name">Name: </div><br/>
     <div id="value">Value:  </div><br/>
     <div id="log">Log: </div><br/>
+   <div id="canView">canView - can be modified by putting this into the javascript console:  </div>
+<pre>this.object.attr("value","asdf")</pre>
+   <br/>
+
+   <script id="canViewView" type="text/mustache">
+    <p id="msg">Object Value {{object.value}} </p>
+   </script>
+<hr>
+
+<h1>Fiddle</h1>
+<!-- YOUR CODE HERE -->
+<div id="dummy"></div>
+
+<!-- PUT ANY TEMPLATES YOU NEED HERE -->
+<script id="dummyMustache" type="text/mustache">
+    <a href="javascript://">Click Me</a>
+    <p id="msg">Clicked {{counter.click}} times</p>
+</script>
 
 
   </body>

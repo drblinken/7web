@@ -30,7 +30,32 @@ newVal; // 30
 oldVal; // 50
 });
 // this could be copied to the console:
-  object.attr("value","newValue")
+  object.attr("value","newValue");
+
+this.object = object;
+    var $canView = $("#canView");
+    $canView.append("this...");
+    $canView.append(can.view('canViewView', {
+                object: this.object
+            }));
 }
 $(document).ready(doit);
 
+$(document).ready(function() {
+    Dummy = can.Control({
+        init: function(element, options) {
+            this.counter = new can.Observe({
+                click: 0
+            });
+            this.element.append(can.view('dummyMustache', {
+                counter: this.counter
+            }));
+        },
+        'a click': function(el, ev) {
+            var newCount = this.counter.attr('click') + 1
+            this.counter.attr('click', newCount);
+        }
+    });
+
+    new Dummy('#dummy');
+})();
