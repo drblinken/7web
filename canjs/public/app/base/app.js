@@ -1,9 +1,9 @@
 /***
  * Excerpted from "Seven Web Frameworks in Seven Weeks",
  * published by The Pragmatic Bookshelf.
- * Copyrights apply to this code. It may not be used to create training material, 
+ * Copyrights apply to this code. It may not be used to create training material,
  * courses, books, articles, and the like. Contact us if you are in doubt.
- * We make no guarantees that this code is fit for any purpose. 
+ * We make no guarantees that this code is fit for any purpose.
  * Visit http://www.pragmaticprogrammer.com/titles/7web for more book information.
 ***/
 var Bookmark = can.Model.extend({
@@ -11,6 +11,7 @@ var Bookmark = can.Model.extend({
   create: "POST /bookmarks",
   update: "PUT /bookmarks/{id}",
   destroy: "DELETE /bookmarks/{id}",
+  findOne: "GET /bookmarks/{id}"
 }, {
 });
 var BookmarkListControl = can.Control.extend({
@@ -23,7 +24,7 @@ var BookmarkListControl = can.Control.extend({
     var view = options.view || this.view;
     element.html(view, this.getViewModel(options));
   },
-  
+
   getViewModel: function(options) {
     return {bookmarks:options.bookmarks};
   },
@@ -31,12 +32,12 @@ var BookmarkListControl = can.Control.extend({
   getBookmark: function(el) {
     return el.closest("li").data("bookmark");
   },
-  
+
   // handle the click on the delete button, destroy the bookmark
   ".delete click": function(el, evt) {
     this.getBookmark(el).destroy();
   },
-  
+
   // handle the click on the edit button, trigger an editBookmark event
   ".edit click": function(el, evt) {
     can.trigger(this.eventHub, "editBookmark", this.getBookmark(el));
@@ -94,7 +95,7 @@ var App_base = can.Construct.extend({
       // Create the control, attaching it to the element on the page
       // that has id="bookmark_list_container"
       new BookmarkListControl("#bookmark_list_container", options);
-	  
+
       // Create the bookmark form control (which we build in the
       // next section.)
       new BookmarkFormControl("#bookmark_form_container", options);
