@@ -10,10 +10,11 @@
     {{! START:DataView }}
     <li {{data "bookmark"}}>
     {{! START:View }}
-      <button class="edit">Edit</button>
-      <button class="delete">Delete</button>
        <a href="{{url}}">{{title}}</a>
      ( <a href="{{url}}">{{url}}</a> )
+       <img class="edit" src ="/images/edit.png"/>
+       <img class="delete" src ="/images/delete.png"/>
+
     </li>
   {{/bookmarks}}
 </ul>

@@ -63,7 +63,7 @@ var BookmarkFormControl = can.Control.extend({
     //bookmark.bind("destroyed", this.clearForm);
   },
   clearForm: function() { // (3)
-    alert('executing clearForm '+this);
+    //alert('executing clearForm '+this);
     this.editBookmark(new this.BookmarkModel());
   },
   "{eventHub} editBookmark": function(eventHub, evt, bookmark) { // (4)
