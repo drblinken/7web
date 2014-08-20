@@ -57,10 +57,13 @@ var BookmarkFormControl = can.Control.extend({
   editBookmark: function(bookmark) { // (2)
     var view = this.options.view || this.view;
     this.element.html(view, bookmark);
-
     bookmark.bind("destroyed", this.clearForm.bind(this));
+    // without the bind(this), the clearForm will not have a proper binding
+    // it works nonetheless.
+    //bookmark.bind("destroyed", this.clearForm);
   },
   clearForm: function() { // (3)
+    alert('executing clearForm '+this);
     this.editBookmark(new this.BookmarkModel());
   },
   "{eventHub} editBookmark": function(eventHub, evt, bookmark) { // (4)
