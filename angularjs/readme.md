@@ -74,10 +74,11 @@ Maybe provider as described on the Stackoverflow page is another possibility.
 
 * created test file /app/base/app-test-tags-day1.js
 * $resource documentation: https://docs.angularjs.org/api/ngResource/service/$resource
+* added bookmarksWithTags Factory in app.js
 
-### Do: Write Jasmine tests that verify the behaviour of your sevice and run them in your browser
+### Do: Write Jasmine tests that verify the behaviour of your service and run them in your browser
 
-### Do: 
+* written the tests first.
 
 
 

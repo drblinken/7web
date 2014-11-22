@@ -14,6 +14,11 @@
   app.factory("bookmarks", function(Bookmark) {
     return Bookmark.query();
   });
+  app.factory("bookmarksWithTags", function(Bookmark) {
+    return function(tag1,tag2){
+      return Bookmark.query({tag1: tag1, tag2: tag2});
+    };
+  });
   app.factory("bookmark", function(Bookmark) {
     return function(_id){
       return Bookmark.get({id: _id});
