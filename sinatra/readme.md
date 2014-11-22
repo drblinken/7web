@@ -19,6 +19,11 @@ Week 1, Day 1
     /hello - hello world
     /crud - simple crud rest backend using data mapper
 
+
+    ruby crud/app.rb
+    open http://localhost:4567/bookmarks/1
+
+
 ### Links
 * W3C http method definitions http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html
 * W3C http return code definitions [http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html)
@@ -33,9 +38,7 @@ Week 1, Day 1
 * test was already there!
 * added creation_date to Bookmark
 * handler for bookmarks sorted by creation_date
-
-## Urls to open
-http://localhost:4567/bookmarks/1
+    
 
 Week 1, Day 2
 ----
@@ -75,8 +78,6 @@ in /sinatra/validation
     curl http://localhost:4567/bookmarks/A/B
 
     curl -i -H "Accept: application/json" http://localhost:4567/bookmarks
-
-
 
 
 
