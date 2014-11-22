@@ -6,6 +6,11 @@ This source code was originially taken from the [book web site](http://pragprog.
 where it can be found [here](http://pragprog.com/titles/7web/source_code).
 
 * Week 1: [Sinatra](/sinatra)
+* Week 2: [CanJS](/sinatra)
+* Week 3: [Angular.js](/angular)
+
+Miscellany
+----------
 
 Found an [erratum#77057](http://pragprog.com/titles/7web/errata):
 
