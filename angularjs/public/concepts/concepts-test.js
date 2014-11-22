@@ -251,6 +251,7 @@ describe("concepts/concepts-tests.js", function() {
       angular.bootstrap(document, ["TestApp"]);
     });
 
+
     it("allows to override default parameter", function(done) {
       var app = angular.module("TestApp", ["ngResource"]);
       app.service("testService", function($resource) {
@@ -271,7 +272,9 @@ describe("concepts/concepts-tests.js", function() {
       });
 
       app.run(function(testService) { });
-      angular.bootstrap(document, ["TestApp"]);
+      // drb: replaced document with this in this call
+      // as got error that app was already bootstrapped.
+      angular.bootstrap(this, ["TestApp"]);
     });
   });
 
@@ -281,13 +284,16 @@ describe("concepts/concepts-tests.js", function() {
         var myHelper = new MyHelper();
         var result = myHelper.doSomething("test");
         // ...
+
       };
+      expect(1).toBe(1);
     });
     it("is easily testable", function() {
       var MyService = function(myHelper) {
         var result = myHelper.doSomething("test");
         // ...
       };
+      expect(1).toBe(1);
     });
   });
 });

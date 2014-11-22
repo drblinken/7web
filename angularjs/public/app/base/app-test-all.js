@@ -31,10 +31,10 @@ describe("base/app-test.js", function() {
     it("should save a bookmark", inject(
       function($httpBackend, Bookmark, bookmarks, saveBookmark) {
         $httpBackend.flush();
-    
+		
         $httpBackend.expectPOST("/bookmarks").respond({id:4});
         saveBookmark(new Bookmark({url:"http://angularjs.org", title:"AngularJS"}));
-    
+		
         $httpBackend.flush();
         expect(bookmarks.length).toBe(mockBookmarks.length + 1);
       }
@@ -44,10 +44,10 @@ describe("base/app-test.js", function() {
       function($httpBackend, bookmarks, deleteBookmark) {
         $httpBackend.flush();
         var bookmark = bookmarks[0];
-    
+		
         $httpBackend.expectDELETE("/bookmarks/" + bookmark.id).respond(200);
         deleteBookmark(bookmark);
-    
+		
         $httpBackend.flush();
         expect(bookmarks.length).toBe(mockBookmarks.length - 1);
       }
