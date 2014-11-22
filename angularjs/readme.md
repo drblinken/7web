@@ -43,11 +43,36 @@ Decided to install newest Jasmin version as well. followed these steps:
     mv dist/jasmine-standalone-2.1.2.zip ../7web-myversion/angularjs/public/lib/jasmine-2.1.2/
     unzip jasmine-standalone-2.1.2.zip
 
-####Find: Two other ways to define services besides servic and factory
+run tests seems no longer needed, got this error: https://docs.angularjs.org/error/ng/btstrpd - and fixed it by changing a bootstrap call in concepts.js
 
-####Find: The angular-seed project which you can use as a template for your AngularJS applications
+####Find: Two other ways to define services besides service and factory
+* Providers http://stackoverflow.com/questions/15666048/service-vs-provider-vs-factory
+
+from https://docs.angularjs.org/guide/services:
+
+"Application developers are free to define their own services by registering the service's name and service factory function, with an Angular module."
+
+
+https://docs.angularjs.org/api/ng/type/angular.Module
+- are all these Angular.js services as well? I think so, that is 
+filter, animation are two other ways to define services. 
+Maybe provider as described on the Stackoverflow page is another possibility.
+
+####Find: The angular-seed project
+
+... which you can use as a template for your AngularJS applications
+* https://github.com/angular/angular-seed
+
+    git clone --depth=1 https://github.com/angular/angular-seed.git angular-own-    eded
+    npm install
+    npm start
+    open http://localhost:8000/app/index.html
+
+
 
 ### Do: Take advantage of the REST API from our Sinatra server and write a service that retrieves bookmarks with tags using the /bookmarks/:tag URI
+
+
 
 ### Do: Write Jasmine tests that verify the behaviour of your sevice and run them in your browser
 
