@@ -11,7 +11,7 @@ var app = angular.module("BasicApp", []); // (1)
 app.service("greeter", function() { // (2)
   this.name = "";
   this.greeting = function() {
-    return (this.name) ? ("Hello, " + this.name + "!") : "";
+    return (this.name) ? ("Hello, " + this.name + "!") : "no name yet";
   };
 });
 
