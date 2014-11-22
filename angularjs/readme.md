@@ -72,7 +72,8 @@ Maybe provider as described on the Stackoverflow page is another possibility.
 
 ### Do: Take advantage of the REST API from our Sinatra server and write a service that retrieves bookmarks with tags using the /bookmarks/:tag URI
 
-
+* created test file /app/base/app-test-tags-day1.js
+* $resource documentation: https://docs.angularjs.org/api/ngResource/service/$resource
 
 ### Do: Write Jasmine tests that verify the behaviour of your sevice and run them in your browser
 

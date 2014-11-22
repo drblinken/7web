@@ -13,26 +13,21 @@ describe("base/app-test.js", function() {
 
   // Add tests here
 
-  describe("Bookmark resource", function() {
+  describe("Bookmark with Tags resource", function() {
     var mockBookmarks = null;
     beforeEach(inject(function($httpBackend, Bookmark) { // (1)
       mockBookmarks = [
-        new Bookmark({id:1}), new Bookmark({id:2}), new Bookmark({id:3})
+        new Bookmark({id:1, tagList: ["One","Two"]}), new Bookmark({id:2,tagList: ["Two","Three"]}), new Bookmark({id:3,tagList: ["Three"]})
       ];
-      $httpBackend.expectGET("/bookmarks").respond(mockBookmarks); // (2)
+      bookMarksTaggedTwo= [mockBookmarks[0],mockBookmarks[1]]
+      $httpBackend.expectGET("/bookmarks/Two").respond(bookMarksTaggedTwo); // (2)
     }));
-    it("should retrieve bookmarks", inject(function($httpBackend, bookmarks) { // (3)
+    it("should retrieve bookmarks with tags", inject(function($httpBackend, bookmarks) { // (3)
       $httpBackend.flush();
-      expect(bookmarks.length).toBe(mockBookmarks.length); // (4)
+      expect(bookmarks.length).toBe(bookMarksTaggedTwo.length); // (4)
     }));
 
-    it("should retrieve a single bookmark", inject(function($httpBackend, bookmarks,bookmark) { // (3)
-      $httpBackend.flush();
-      $httpBackend.expectGET("/bookmarks/1").respond(mockBookmarks[0]);
-      var oneBookmark = bookmark(1);
-      $httpBackend.flush();
-      expect(oneBookmark.id).toBe(1);
-    }));
+    // add more tests here
 
     it("should save a bookmark", inject(
       function($httpBackend, Bookmark, bookmarks, saveBookmark) {

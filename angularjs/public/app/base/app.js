@@ -9,10 +9,15 @@
 (function(app) {
   // define factories, controllers, etc. on app
   app.factory("Bookmark", function($resource) {
-    return $resource("/bookmarks/:id", {id:"@id"});
+    return $resource("/bookmarks/:tag1/:tag2/:id", {id:"@id"});
   });
   app.factory("bookmarks", function(Bookmark) {
     return Bookmark.query();
+  });
+  app.factory("bookmark", function(Bookmark) {
+    return function(_id){
+      return Bookmark.get({id: _id});
+    };
   });
   app.factory("deleteBookmark", function(bookmarks) {
     return function(bookmark) {
