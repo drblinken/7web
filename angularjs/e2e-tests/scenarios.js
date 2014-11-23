@@ -1,42 +1,34 @@
 'use strict';
-
-/* https://github.com/angular/protractor/blob/master/docs/toc.md */
-
-describe('my app', function() {
-
-  browser.get('index.html');
-
-  it('should automatically redirect to /view1 when location hash/fragment is empty', function() {
-    expect(browser.getLocationAbsUrl()).toMatch("/view1");
-  });
-
-
-  describe('view1', function() {
-
+/***
+ * Excerpted from "Seven Web Frameworks in Seven Weeks",
+ * published by The Pragmatic Bookshelf.
+ * Copyrights apply to this code. It may not be used to create training material, 
+ * courses, books, articles, and the like. Contact us if you are in doubt.
+ * We make no guarantees that this code is fit for any purpose. 
+ * Visit http://www.pragmaticprogrammer.com/titles/7web for more book information.
+***/
+describe("e2e-tests.js", function() {
+  describe("Bookmark list", function() {
     beforeEach(function() {
-      browser.get('index.html#/view1');
+      browser.get("/");
+    });
+    it("should display a bookmark list", function() {
+      var bookmarklist = element.all(by.repeater("bookmark in bookmarks"));
+      expect(bookmarklist.count()).toBeGreaterThan(0);
+      //expect(repeater("li.bookmark").count()).toBeGreaterThan(0);
     });
 
-
-    it('should render view1 when user navigates to /view1', function() {
-      expect(element.all(by.css('[ng-view] p')).first().getText()).
-        toMatch(/partial for view 1/);
-    });
-
-  });
-
-
-  describe('view2', function() {
-
-    beforeEach(function() {
-      browser.get('index.html#/view2');
-    });
-
-
-    it('should render view2 when user navigates to /view2', function() {
-      expect(element.all(by.css('[ng-view] p')).first().getText()).
-        toMatch(/partial for view 2/);
-    });
-
+    //it("should add a new bookmark", function() {
+    //  var bookmarkCount = repeater("li.bookmark").count(); // (1)
+    //  bookmarkCount.execute(function() {});
+    //  var previousCount = bookmarkCount.value;
+//
+    //  input("formBookmark.bookmark.url"). // (2)
+    //    enter("http://docs.angularjs.org/guide/dev_guide.e2e-testing");
+    //  input("formBookmark.bookmark.title").
+    //    enter("AngularJS end-to-end testing guide");
+    //  element("input:submit").click(); // (3)
+    //  expect(repeater("li.bookmark").count()).toBe(previousCount + 1); // (4)
+    //});
   });
 });
