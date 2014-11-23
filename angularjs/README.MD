@@ -1,5 +1,38 @@
 7web Week 3 - Angular.js
 ===================
+
+Overview
+------------------------
+
+### Used Frameworks/Libraries
+
+* Bower Package Manager [http://bower.io/](http://bower.io/) (from angular-seed)
+* [Karma Test Runner](https://github.com/karma-runner/karma), conf copied from angular-seed
+* Protractor
+* node for Karma angularjsd Protractor
+
+### Start the application
+
+* start the back end (sinatra): 
+
+    ```
+    ruby app.rb
+    ```
+
+* open the app: 
+
+    ```
+    open http://localhost:4567
+    ```
+
+* run tests (unit/backend with karma and Frontend tests with protractor)
+
+    ```
+    npm test
+    npm run protractor
+    ```
+
+
 Day 1 
 -----
 
@@ -131,16 +164,20 @@ Protractor Tests can then be started with
     npm run protractor
     ```
 
+Then rewrote the Tests. Resources: 
+
+* Locators: angular.github.io/protractor/#/locators
+* http://stackoverflow.com/questions/21685161/how-to-expect-dynamic-count-of-elements-in-e2e-tests-using-protractor
 * http://angular.github.io/protractor/#/tutorial
 
 ####Do: Try using different view directivess and verify the results in your browser. For example, us ng-mouseenter and ng-mouseleave to show and hid a bookmark's tags when moving the mouse.
 
 ####Do: Write end-to-end tests to verify the behaviour of the view directives.
 
+Skipping that as I did the rewrite to Protractor Tests.
+
 ####Do: run your tests with Karma, a test runner created by the AngularJS team.
 
 * http://karma-runner.github.io/0.12/index.html
 
-
-
-####Do:
+####Todo: if I want to use bower, I should clean up the other dependencies.

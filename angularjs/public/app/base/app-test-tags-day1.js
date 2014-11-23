@@ -45,32 +45,5 @@ describe("base/app-test.js", function() {
       expect(tagged.length).toBe(1); 
     }));
     
-
-    // add more tests here
-
-  //  it("should save a bookmark", inject(
-  //    function($httpBackend, Bookmark, bookmarks, saveBookmark) {
-  //      $httpBackend.flush();
-  //  
-  //      $httpBackend.expectPOST("/bookmarks").respond({id:4});
-  //      saveBookmark(new Bookmark({url:"http://angularjs.org", title:"AngularJS"}));
-  //  
-  //      $httpBackend.flush();
-  //      expect(bookmarks.length).toBe(mockBookmarks.length + 1);
-  //    }
-  //  ));
-//
-  //  it("should delete a bookmark", inject(
-  //    function($httpBackend, bookmarks, deleteBookmark) {
-  //      $httpBackend.flush();
-  //      var bookmark = bookmarks[0];
-  //  
-  //      $httpBackend.expectDELETE("/bookmarks/" + bookmark.id).respond(200);
-  //      deleteBookmark(bookmark);
-  //  
-  //      $httpBackend.flush();
-  //      expect(bookmarks.length).toBe(mockBookmarks.length - 1);
-  //    }
-  //  ));
   });
 });

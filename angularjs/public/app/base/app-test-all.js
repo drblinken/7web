@@ -1,3 +1,4 @@
+'use strict';
 /***
  * Excerpted from "Seven Web Frameworks in Seven Weeks",
  * published by The Pragmatic Bookshelf.
