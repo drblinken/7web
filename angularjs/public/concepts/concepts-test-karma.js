@@ -10,7 +10,7 @@
 
 drb: adapted this file to run with karma. 
 There were two recurring issues: 
-done() is somehow not definied, I just commented it out.
+done() is not definied (that is the synchronisation trick...) I just commented it out.
 where there was a complaint that a factory needs to return a value,
 I just returned something arbitrary.
 
@@ -43,7 +43,7 @@ describe("concepts/concepts-tests.js", function() {
         angular.bootstrap(this, ["TestApp"]);
       });
 
-      it("works with factory and function parameter names", function(done) {
+      it("works with factory and function parameter names", function() {
         var app = angular.module("TestApp", []);
         app.factory("serviceA", function() {
           return {name:"A"};
@@ -57,14 +57,13 @@ describe("concepts/concepts-tests.js", function() {
           expect(serviceA.name).toBe("A");
           expect(serviceB.name).toBe("B");
           return 1;
-          //done();
         });
 
         app.run(function(serviceC) { });
         angular.bootstrap(this, ["TestApp"]);
       });
 
-      it("works with service and $inject", function(done) {
+      it("works with service and $inject", function() {
         var app = angular.module("TestApp", []);
 
         app.service("serviceA", function() {
@@ -78,7 +77,6 @@ describe("concepts/concepts-tests.js", function() {
           svcB.name; // returns "B"
           expect(svcA.name).toBe("A");
           expect(svcB.name).toBe("B");
-          //done();
         };
         svcC.$inject = ["serviceA", "serviceB"];
         app.service("serviceC", svcC);
@@ -118,7 +116,7 @@ describe("concepts/concepts-tests.js", function() {
         angular.bootstrap(this, ["TestApp"]);
       });
 
-      it("works with service and inline annotation", function(done) {
+      it("works with service and inline annotation", function() {
         var app = angular.module("TestApp", []);
         app.service("serviceA", function() {
           this.name = "A";
@@ -131,7 +129,6 @@ describe("concepts/concepts-tests.js", function() {
           svcB.name; // returns "B"
           expect(svcA.name).toBe("A");
           expect(svcB.name).toBe("B");
-          //done();
         }]);
 
         app.run(["serviceC", function(svcC) { }]);
@@ -162,7 +159,7 @@ describe("concepts/concepts-tests.js", function() {
   });
 
   describe("provider", function() {
-    it("can be a value", function(done) {
+    it("can be a value", function() {
       var app = angular.module("TestApp", []);
       app.value("ducks", 42);
       app.service("testService", function(ducks) {
@@ -231,7 +228,7 @@ describe("concepts/concepts-tests.js", function() {
       app.value("sound", "quack!");
       app.service("testService", function(DuckService) {
         expect(DuckService.quack()).toBe("quack, quack!");
-        //done();
+       
       });
 
       app.run(function(testService) { });
@@ -248,9 +245,12 @@ describe("concepts/concepts-tests.js", function() {
     
  
     it("CRUDs with the server", function() { 
+        debugger;
       var app = angular.module("TestApp", ["ngResource"]);
+
       var mockHttpBackend ;
       inject(function($httpBackend) {
+      
         $httpBackend.expectPOST("/bookmarks").respond({id:4});
         mockHttpBackend = $httpBackend;
         // gives an error here: mockHttpBackend.flush();
