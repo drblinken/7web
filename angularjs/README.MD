@@ -131,6 +131,7 @@ Protractor Tests can then be started with
     npm run protractor
     ```
 
+* http://angular.github.io/protractor/#/tutorial
 
 ####Do: Try using different view directivess and verify the results in your browser. For example, us ng-mouseenter and ng-mouseleave to show and hid a bookmark's tags when moving the mouse.
 

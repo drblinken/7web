@@ -9,26 +9,31 @@
 ***/
 describe("e2e-tests.js", function() {
   describe("Bookmark list", function() {
+    
+    var bookmarksCount;
+
     beforeEach(function() {
       browser.get("/");
+      
+      element.all(by.repeater("bookmark in bookmarks")).count().then(
+        function(originalCount) {
+          bookmarksCount = originalCount;
+        });
     });
     it("should display a bookmark list", function() {
       var bookmarklist = element.all(by.repeater("bookmark in bookmarks"));
       expect(bookmarklist.count()).toBeGreaterThan(0);
-      //expect(repeater("li.bookmark").count()).toBeGreaterThan(0);
     });
 
-    //it("should add a new bookmark", function() {
-    //  var bookmarkCount = repeater("li.bookmark").count(); // (1)
-    //  bookmarkCount.execute(function() {});
-    //  var previousCount = bookmarkCount.value;
-//
-    //  input("formBookmark.bookmark.url"). // (2)
-    //    enter("http://docs.angularjs.org/guide/dev_guide.e2e-testing");
-    //  input("formBookmark.bookmark.title").
-    //    enter("AngularJS end-to-end testing guide");
-    //  element("input:submit").click(); // (3)
-    //  expect(repeater("li.bookmark").count()).toBe(previousCount + 1); // (4)
-    //});
+    it("should add a new bookmark", function() {
+      var urlField = element(by.model('formBookmark.bookmark.url'));
+      urlField.sendKeys('http://angular.github.io/protractor');
+      var titleField = element(by.model('formBookmark.bookmark.title'));
+      titleField.sendKeys('Protractor');
+      var saveButton = element(by.id("savebutton"));
+      saveButton.click(); 
+      var bookmarklist = element.all(by.repeater("bookmark in bookmarks"));
+      expect(bookmarklist.count()).toBe(bookmarksCount + 1); 
+    });
   });
 });
