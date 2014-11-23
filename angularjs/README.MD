@@ -79,10 +79,49 @@ Maybe provider as described on the Stackoverflow page is another possibility.
 
 * written the tests first.
 
-
 Day 2
 -----
 
+Start Example
 
- 
+    open http://localhost:4567
 
+Chapter explains the two way data binding for editing bookmarks, main point is to refer to a shared object instance (formBookmark.bookmark) from both state and $scope.
+
+Second part discusses end to end tests (system tests) started with
+
+    open http://localhost:4567/e2e-test-runner.html
+
+### Day 2 Self-Study
+
+####Find: AngularJS directives
+
+    [https://docs.angularjs.org/api/ng/directive](https://docs.angularjs.org/api/ng/directive)
+
+
+####Find: The API for the AngularJS end-to-end testing library
+
+*   https://docs.angularjs.org/guide/e2e-testing
+(easily found from the url given in the test cases, but that was outdated)
+
+Angular Scenario Runner is Outdated and has been replaced by Protractor.
+
+https://code.angularjs.org/1.2.16/docs/guide/e2e-testing
+
+I guess I have to rewrite the test examples with Protractor.
+
+this is the link to the Angular.js E2E test runner: 
+    * https://code.angularjs.org/1.2.16/docs/guide/e2e-testing
+    * this is the link given in the test examples of the book: http://docs.angularjs.org/guide/dev_guide.e2e-testing
+
+####Do: Try using different view directivess and verify the results in your browser. For example, us ng-mouseenter and ng-mouseleave to show and hid a bookmark's tags when moving the mouse.
+
+####Do: Write end-to-end tests to verify the behaviour of the view directives.
+
+####Do: run your tests with Karma, a test runner created by the AngularJS team.
+
+* http://karma-runner.github.io/0.12/index.html
+
+
+
+####Do:
