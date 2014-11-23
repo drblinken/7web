@@ -114,6 +114,24 @@ this is the link to the Angular.js E2E test runner:
     * https://code.angularjs.org/1.2.16/docs/guide/e2e-testing
     * this is the link given in the test examples of the book: http://docs.angularjs.org/guide/dev_guide.e2e-testing
 
+#####Switch E2E tests to Protractor
+
+as described in the E2E test section in the angular-seed readme.md
+
+* copied bower.json, and e2e-tests dir 
+* copied package.json and then was able to run 
+
+    ```
+    npm run update-webdriver
+    ```
+
+Protractor Tests can then be started with
+
+    ```
+    npm run protractor
+    ```
+
+
 ####Do: Try using different view directivess and verify the results in your browser. For example, us ng-mouseenter and ng-mouseleave to show and hid a bookmark's tags when moving the mouse.
 
 ####Do: Write end-to-end tests to verify the behaviour of the view directives.
