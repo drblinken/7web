@@ -1,6 +1,5 @@
-Week 3 - Angular.js
+7web Week 3 - Angular.js
 ===================
-
 Day 1 
 -----
 
@@ -80,6 +79,9 @@ Maybe provider as described on the Stackoverflow page is another possibility.
 
 * written the tests first.
 
+
+Day 2
+-----
 
 
  

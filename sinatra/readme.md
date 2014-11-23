@@ -1,8 +1,3 @@
----
-layout: bento
-title: 7web | Week 1
----
-
 Seven Web Frameworks in Seven Weeks, Week 1: Sinatra
 ===================
 
